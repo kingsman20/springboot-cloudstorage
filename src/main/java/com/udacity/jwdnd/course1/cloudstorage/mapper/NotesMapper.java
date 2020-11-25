@@ -10,13 +10,14 @@ public interface NotesMapper {
     @Select("SELECT * FROM NOTES")
     List<Notes> findAll();
 
-    @Select("SELECT * FROM NOTES WHERE noteId = #{noteid}")
+    @Select("SELECT * FROM NOTES WHERE noteid = #{noteid}")
     public Notes findOne(int noteid);
 
     @Select("SELECT * FROM NOTES WHERE userid = #{userid}")
     public List<Notes> findByUserId(int userid);
 
-    @Insert("INSERT INTO NOTES (notetitle, notedescription, userid) VALUES (#{note.notetitle}, #{note.notedescription}, #{userid})")
+    @Insert("INSERT INTO NOTES (notetitle, notedescription, userid) VALUES (#{notetitle}, #{notedescription}, #{userid})")
+    @Options(useGeneratedKeys = true, keyProperty = "noteid")
     public int insertNote(Notes note, int userid);
 
     @Delete("DELETE FROM NOTES WHERE noteid = #{noteid}")
