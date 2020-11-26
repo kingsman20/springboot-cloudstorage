@@ -30,7 +30,8 @@ public class NotesController {
             if (notes.getNoteid() > 0) {
                 notesService.updateNote(notes);
             } else {
-                notesService.addNote(notes, user.getUserid());
+                notes.setUserid(user.getUserid());
+                notesService.addNote(notes);
             }
             model.addAttribute("nodeAddedSuccess", true);
             model.addAttribute("notes", notesService.getAllNotes(user.getUserid()));

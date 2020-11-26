@@ -21,8 +21,8 @@ public class NotesService {
         return notes;
     }
 
-    public void addNote(Notes note, int userid) {
-        notesMapper.insertNote(note, userid);
+    public void addNote(Notes note) {
+        notesMapper.insertNote(note);
     }
 
     public void updateNote(Notes note) {
