@@ -33,6 +33,15 @@
                     <div th:if="${fileUploadEmpty}" class="alert alert-info">
                         Please select a file. Can't upload null/empty file.
                     </div>
+                    <div th:if="${noteAddedSuccess}" class="alert alert-info">
+                        Note added successfully!!
+                    </div>
+                    <div th:if="${noteUpdatedSuccess}" class="alert alert-info">
+                        Note updated successfully!!
+                    </div>
+                    <div th:if="${noteDeleteSuccess}" class="alert alert-info">
+                        Note deleted successfully!!
+                    </div>
                     <div class="tab-pane fade show active" id="nav-files" role="tabpanel" aria-labelledby="nav-files-tab">
                         <form th:action="@{/files/upload}" enctype="multipart/form-data" method="POST">
                             <div class="container">
@@ -79,7 +88,7 @@
                         </div>
                     </div>
                     <div class="tab-pane fade" id="nav-notes" role="tabpanel" aria-labelledby="nav-notes-tab">
-                        <button style="margin: 0.25em;" type="button" class="btn btn-info float-right" onclick="showNoteModal()">
+                        <button style="margin: 0.25em;" type="button" class="btn btn-info float-right" onclick="showNoteModal()" id="btnAddNewNote">
                             + Add a New Note
                         </button>
 
@@ -101,14 +110,21 @@
                                     <th scope="row">Example Note Title</th>
                                     <td>Example Note Description </td>
                                 </tr>
-<!--                                <tr th:each="note: ${notes}">-->
-<!--                                    <td>-->
-<!--                                        <button name = "edit" th:onclick="javascript:showNoteModal([[${note}]])" type="button" class="btn btn-success">Edit</button>-->
-<!--                                        <a name = "delete" th:href="@{/notes/delete(id=${note.noteid})}" class="btn btn-danger">Delete</a>-->
-<!--                                    </td>-->
-<!--                                    <th scope="row" th:text="${note.notetitle}"></th>-->
-<!--                                    <td th:text="${note.notedescription}"></td>-->
-<!--                                </tr>-->
+                                <tr th:each="note: ${notes}">
+                                    <td>
+                                        <button id="btnEditNote"
+                                                name = "edit"
+                                                th:data-id="${note.getNoteid()}"
+                                                th:data-title="${note.getNotetitle()}"
+                                                th:data-description="${note.getNotedescription()}"
+                                                th:onclick="javascript:showNoteModal(this.getAttribute('data-id'), this.getAttribute('data-title'), this.getAttribute('data-description'))"
+                                                type="button"
+                                                class="btn btn-success">Edit</button>
+                                        <a name = "delete" th:href="@{/notes/delete/{noteid}(noteid=${note.noteid})}" class="btn btn-danger">Delete</a>
+                                    </td>
+                                    <th scope="row" th:text="${note.notetitle}"></th>
+                                    <td th:text="${note.notedescription}"></td>
+                                </tr>
                                 </tbody>
                             </table>
                         </div>
