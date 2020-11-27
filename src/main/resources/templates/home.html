@@ -12,7 +12,7 @@
         <div class="container">
             <div id="logoutDiv">
                 <form th:action="@{/logout}" method="POST">
-                    <button type="submit" class="btn btn-secondary float-right">Logout</button>
+                    <button type="submit" id="logout" class="btn btn-secondary float-right">Logout</button>
                 </form>
             </div>
             <div id="contentDiv" style="clear: right;">
@@ -113,8 +113,8 @@
                                 <tbody>
                                 <tr th:if="${#lists.isEmpty(notes)}">
                                     <td>
-                                        <button type="button" class="btn btn-success">Edit</button>
-                                        <a class="btn btn-danger">Delete</a>
+                                        <button name="edit" type="button" class="btn btn-success">Edit</button>
+                                        <a name="delete" class="btn btn-danger">Delete</a>
                                     </td>
                                     <th scope="row">Example Note Title</th>
                                     <td>Example Note Description </td>
@@ -129,7 +129,7 @@
                                                 th:onclick="javascript:showNoteModal(this.getAttribute('data-id'), this.getAttribute('data-title'), this.getAttribute('data-description'))"
                                                 type="button"
                                                 class="btn btn-success">Edit</button>
-                                        <a name = "delete" th:href="@{/notes/delete/{noteid}(noteid=${note.noteid})}" class="btn btn-danger">Delete</a>
+                                        <a name="delete" th:href="@{/notes/delete/{noteid}(noteid=${note.noteid})}" class="btn btn-danger">Delete</a>
                                     </td>
                                     <th scope="row" th:text="${note.notetitle}"></th>
                                     <td th:text="${note.notedescription}"></td>
@@ -163,7 +163,7 @@
                                     </div>
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                        <button type="button" class="btn btn-primary" onclick="$('#noteSubmit').click();">Save changes</button>
+                                        <button type="button" id="btnNoteSubmit" class="btn btn-primary" onclick="$('#noteSubmit').click();">Save changes</button>
                                     </div>
                                 </div>
                             </div>
@@ -245,7 +245,7 @@
                                     </div>
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                        <button type="button" class="btn btn-primary" onclick="$('#credentialSubmit').click();">Save changes</button>
+                                        <button type="button" id="save-credential" class="btn btn-primary" onclick="$('#credentialSubmit').click();">Save changes</button>
                                     </div>
                                 </div>
                             </div>
